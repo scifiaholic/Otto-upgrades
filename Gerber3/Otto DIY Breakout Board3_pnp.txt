@@ -1,0 +1,26 @@
+*Pick And Place List
+*Company=
+*Author=
+*eMail=
+*
+*Project=Otto DIY Breakout Board3
+*Date=19:12:41
+*CreatedBy=Fritzing 0.9.3b.04.19.5c895d327c44a3114e5fcc9d8260daf0cbb52806
+*
+*
+*Coordinates in mm, always center of component
+*Origin 0/0=Lower left corner of PCB
+*Rotation in degree (0-360, math. pos.)
+*
+*No;Value;Package;X;Y;Rotation;Side;Name
+1;;;19.9474;-7.11139;-180;Bottom;M3
+2;;THT;27.4474;-9.07139;0;Bottom;J2
+3;;;18.6374;-38.0717;180;Bottom;hc-sr1
+4;;;14.9474;-7.11139;-180;Bottom;M4
+5;;;17.0951;-23.8236;-90;Bottom;WeMos D1 Mini1
+6;;THT;1.44735;-7.11139;180;Bottom;S3
+7;;;12.4474;-7.11139;-180;Bottom;M2
+8;;;8.94735;-5.80139;90;Bottom;BATT1
+9;;;17.4474;-7.11139;-180;Bottom;M1
+10;;THT;6.44735;-7.11139;-180;Bottom;S1
+11;;THT;27.4474;-1.57139;0;Bottom;J3
