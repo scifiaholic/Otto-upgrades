@@ -29,10 +29,10 @@ UDP udp; // define the UDP object
 String ip = "192.168.1.28"; // the remote IP address
 int port = 8888; // the destination port
 
-byte command[] = {90,90,90,90};
+String command = "";
 
 public void setup() {
-  size(400, 400);
+  size(1024, 1024);
   // Initialise the ControlIO
   control = ControlIO.getInstance(this);
   // Find a device that matches the configuration file
@@ -43,6 +43,10 @@ public void setup() {
   }
   // Setup a function to trap events for this button
   stick.getButton("SHADOW").plug(this, "dropShadow", ControlIO.ON_RELEASE);
+  
+  udp = new UDP( this, 8888 ); // create a new datagram connection on port 8888
+  udp.log( true ); // <- printout the connection activity
+  udp.listen( true ); // and wait for incoming message
 }
 
 // Poll for user input called from the draw() method.
@@ -63,12 +67,15 @@ public void dropShadow() {
 
 void sendcommand(int leftJoyX, int leftJoyY, int rightJoyX, int rightJoyY) {
   //compile the command from its words
-  command[0] = byte(map(leftJoyX, 0, 1024, 0, 180));
-  command[1] = byte(map(leftJoyY, 0, 1024, 0, 180));
-  command[2] = byte(map(rightJoyX, 0, 1024, 0, 180));
-  command[3] = byte(map(rightJoyY, 0, 1024, 0, 180));
+  float a = map(leftJoyX, 0, 1024, 0, 180);
+  float b = map(leftJoyY, 0, 1024, 0, 180);
+  float c = map(rightJoyX, 0, 1024, 0, 180);
+  float d = map(rightJoyY, 0, 1024, 0, 180);
+  command = str(char(byte(a))) + str(char(byte(b))) + str(char(byte(c))) + str(char(byte(d)));
+  //print(a + " " + b + " " + c + " " + d + " " + command);
+  print(leftJoyX + " " + leftJoyY + " " + rightJoyX + " " + rightJoyY);
   udp.send(command, ip, port);  
-  print(command);
+
 }
 
 public void draw() {
@@ -78,5 +85,7 @@ public void draw() {
   noStroke();
   fill(255, 64, 64, 64);
   ellipse(px, py, 20, 20);
-  sendcommand(int(px), int(py), int(pa) , int(pb));
+  fill(64, 255, 64, 64);
+  ellipse(pb, pa, 20, 20);
+  sendcommand(int(px), int(py), int(pb) , int(pa));
 }
